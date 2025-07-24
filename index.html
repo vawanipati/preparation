@@ -3,293 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lead Software Engineer Interview Roadmap</title>
+    <title>Finance Blog & Tools</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #E6F0FF;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f0f4f8; /* Light background */
+            color: #334155; /* Dark text */
         }
-        .chart-container {
+        .section-title {
             position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 3rem;
+            height: 3px;
+            background-color: #3B82F6; /* Blue underline */
+            border-radius: 9999px; /* Rounded line */
+        }
+        .tool-card input, .tool-card select {
+            border: 1px solid #d1d5db; /* Light gray border */
+            border-radius: 0.5rem; /* Rounded corners */
+            padding: 0.75rem 1rem;
             width: 100%;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 320px;
-            max-height: 400px;
+            transition: border-color 0.2s ease-in-out;
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
+        .tool-card input:focus, .tool-card select:focus {
+            outline: none;
+            border-color: #3B82F6; /* Blue focus */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25); /* Light blue shadow */
         }
-        .flowchart-step {
-            border: 2px solid #58A6FF;
-            background-color: white;
-            color: #004AAD;
+        .btn-primary {
+            background-color: #3B82F6; /* Blue */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .flowchart-arrow {
-            color: #007BFF;
-            font-size: 2rem;
-            line-height: 1;
+        .btn-primary:hover {
+            background-color: #2563EB; /* Darker blue */
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .result-box {
+            background-color: #e0f2fe; /* Lighter blue for results */
+            border: 1px solid #90cdf4; /* Blue border */
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="flex flex-col min-h-screen">
 
-    <!--
-    Infographic Plan:
-    Narrative: A visual roadmap guiding aspiring leads through key preparation areas.
-    Structure:
-    1. Hero: Title and hook.
-    2. The Technical Core: Radar charts for Java, Spring, and Kafka to show multi-faceted knowledge requirements.
-    3. The Architect's Blueprint: An HTML/CSS flowchart for the system design process.
-    4. The Leader's Compass: A horizontal bar chart for essential soft skills.
-    5. Focus Distribution: A donut chart showing recommended preparation time allocation.
-    6. Conclusion: Final motivational message.
+    <!-- Header / Navigation Bar -->
+    <header class="bg-white shadow-sm p-4 sticky top-0 z-10">
+        <nav class="container mx-auto flex justify-between items-center px-4">
+            <a href="#" class="text-2xl font-bold text-gray-800 rounded-md p-2 hover:bg-gray-100 transition-colors">FinanceFlow</a>
+            <div class="space-x-4">
+                <a href="#blog-posts" class="text-gray-600 hover:text-blue-600 transition-colors font-medium rounded-md p-2 hover:bg-gray-100">Blog</a>
+                <a href="#financial-tools" class="text-gray-600 hover:text-blue-600 transition-colors font-medium rounded-md p-2 hover:bg-gray-100">Tools</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors font-medium rounded-md p-2 hover:bg-gray-100">About</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors font-medium rounded-md p-2 hover:bg-gray-100">Contact</a>
+            </div>
+        </nav>
+    </header>
 
-    Visualization Choices:
-    - Core Tech Topics -> Goal: Compare -> Choice: Radar Chart (Chart.js/Canvas) -> Justification: Excellent for showing coverage across multiple axes within a single domain. Confirms NO SVG.
-    - System Design Process -> Goal: Organize -> Choice: Flow Chart (HTML/CSS) -> Justification: Best way to show a sequence or process without using SVG or Mermaid JS. Confirms NO SVG.
-    - Leadership Skills -> Goal: Compare -> Choice: Horizontal Bar Chart (Chart.js/Canvas) -> Justification: Clear and effective for comparing the relative importance of distinct categories. Confirms NO SVG.
-    - Prep Time Allocation -> Goal: Inform/Composition -> Choice: Donut Chart (Chart.js/Canvas) -> Justification: Ideal for showing parts of a whole, making focus areas immediately obvious. Confirms NO SVG.
+    <main class="flex-grow container mx-auto p-4 md:p-8">
 
-    Color Palette: Brilliant Blues (#004AAD, #007BFF, #58A6FF, #B2D6FF, #E6F0FF)
-
-    Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All visuals are rendered using Chart.js on Canvas or structured HTML/CSS with Tailwind.
-    -->
-
-    <div class="container mx-auto p-4 md:p-8">
-
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-[#004AAD] mb-2">Your Roadmap to a Lead Software Engineer Role</h1>
-            <p class="text-lg text-[#007BFF]">A visual guide to mastering the key domains for your next career leap.</p>
-        </header>
-
-        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <section class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h2 class="text-3xl font-bold text-[#004AAD] mb-4 text-center">The Technical Core: Java, Spring & Kafka</h2>
-                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
-                    A lead engineer must possess deep, multi-faceted knowledge of the core technology stack. It's not just about knowing the syntax; it's about understanding the "why" behind the architecture, performance, and trade-offs. These charts represent the key areas of mastery required for each technology.
-                </p>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="flex flex-col items-center">
-                        <h3 class="text-xl font-bold text-[#004AAD] mb-2">Advanced Java</h3>
-                        <div class="chart-container">
-                            <canvas id="javaChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <h3 class="text-xl font-bold text-[#004AAD] mb-2">Spring Ecosystem</h3>
-                        <div class="chart-container">
-                            <canvas id="springChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <h3 class="text-xl font-bold text-[#004AAD] mb-2">Apache Kafka</h3>
-                        <div class="chart-container">
-                            <canvas id="kafkaChart"></canvas>
-                        </div>
+        <!-- Blog Posts Section -->
+        <section id="blog-posts" class="my-10">
+            <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">Latest Blog Posts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Blog Post Card 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-200 hover:scale-[1.01]">
+                    <img src="https://placehold.co/600x400/BFDBFE/000?text=Investment+Basics" alt="Investment Basics" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Understanding Investment Basics</h3>
+                        <p class="text-gray-600 text-sm mb-4">Learn the fundamentals of investing, from stocks and bonds to mutual funds and ETFs.</p>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Read More &rarr;</a>
                     </div>
                 </div>
-            </section>
 
-            <section class="md:col-span-2 lg:col-span-3 bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h2 class="text-3xl font-bold text-[#004AAD] mb-4 text-center">The Architect's Blueprint: System Design</h2>
-                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
-                    Moving to a lead role means shifting from implementing features to designing entire systems. You must be able to translate business requirements into a scalable, reliable, and maintainable architecture. This flowchart outlines the critical thinking process involved in a system design interview.
-                </p>
-                <div class="flex flex-col items-center space-y-4">
-                    <div class="flowchart-step rounded-lg p-4 font-bold text-center w-3/4 md:w-1/2">1. Clarify Requirements & Scope</div>
-                    <div class="flowchart-arrow">↓</div>
-                    <div class="flowchart-step rounded-lg p-4 font-bold text-center w-3/4 md:w-1/2">2. Back-of-the-Envelope Estimation</div>
-                    <div class="flowchart-arrow">↓</div>
-                    <div class="flowchart-step rounded-lg p-4 font-bold text-center w-3/4 md:w-1/2">3. Design High-Level Components</div>
-                    <div class="flowchart-arrow">↓</div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full px-4">
-                        <div class="flowchart-step rounded-lg p-3 text-center">API Design (REST/gRPC)</div>
-                        <div class="flowchart-step rounded-lg p-3 text-center">Database Schema</div>
-                        <div class="flowchart-step rounded-lg p-3 text-center">Data Flow (Queues/Streams)</div>
+                <!-- Blog Post Card 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-200 hover:scale-[1.01]">
+                    <img src="https://placehold.co/600x400/D1FAE5/000?text=Budgeting+Tips" alt="Budgeting Tips" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">5 Essential Budgeting Strategies</h3>
+                        <p class="text-gray-600 text-sm mb-4">Master your finances with these practical tips for creating and sticking to a budget.</p>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Read More &rarr;</a>
                     </div>
-                    <div class="flowchart-arrow">↓</div>
-                    <div class="flowchart-step rounded-lg p-4 font-bold text-center w-3/4 md:w-1/2">4. Deep Dive & Identify Bottlenecks</div>
-                    <div class="flowchart-arrow">↓</div>
-                    <div class="flowchart-step rounded-lg p-4 font-bold text-center w-3/4 md:w-1/2">5. Scale the System (Caching, LB, Sharding)</div>
                 </div>
-            </section>
 
-            <section class="md:col-span-1 lg:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h2 class="text-3xl font-bold text-[#004AAD] mb-4 text-center">The Leader's Compass: Behavioral Skills</h2>
-                 <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
-                    Technical skills get you in the door, but leadership skills make you effective. A lead is a multiplier, elevating the entire team through mentorship, clear communication, and strategic vision. This chart highlights the non-technical competencies that are paramount for success.
-                </p>
-                <div class="chart-container h-96 md:h-[450px]">
-                    <canvas id="leadershipChart"></canvas>
+                <!-- Blog Post Card 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-200 hover:scale-[1.01]">
+                    <img src="https://placehold.co/600x400/FEE2E2/000?text=Retirement+Planning" alt="Retirement Planning" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Planning for a Secure Retirement</h3>
+                        <p class="text-gray-600 text-sm mb-4">Discover key steps to ensure a comfortable and financially secure retirement.</p>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Read More &rarr;</a>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="md:col-span-1 lg:col-span-1 bg-white rounded-lg shadow-lg p-6 md:p-8 flex flex-col justify-center">
-                <h2 class="text-3xl font-bold text-[#004AAD] mb-4 text-center">Preparation Focus</h2>
-                <p class="text-center text-gray-600 mb-8">
-                    Allocate your study time wisely. While core tech is foundational, a lead candidate must demonstrate significant strength in system design and leadership.
-                </p>
-                <div class="chart-container h-64 md:h-80">
-                    <canvas id="focusChart"></canvas>
+        <!-- Financial Tools Section -->
+        <section id="financial-tools" class="my-10">
+            <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">Financial Tools</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Compound Interest Calculator Card -->
+                <div class="bg-white rounded-xl shadow-lg p-6 tool-card">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Compound Interest Calculator</h3>
+                    <div class="mb-4">
+                        <label for="principal" class="block text-gray-700 text-sm font-medium mb-2">Principal Amount ($)</label>
+                        <input type="number" id="principal" value="1000" min="0" class="w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="mb-4">
+                        <label for="annualRate" class="block text-gray-700 text-sm font-medium mb-2">Annual Interest Rate (%)</label>
+                        <input type="number" id="annualRate" value="5" min="0" step="0.1" class="w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="mb-4">
+                        <label for="years" class="block text-gray-700 text-sm font-medium mb-2">Number of Years</label>
+                        <input type="number" id="years" value="10" min="1" class="w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="mb-6">
+                        <label for="compoundFrequency" class="block text-gray-700 text-sm font-medium mb-2">Compounding Frequency</label>
+                        <select id="compoundFrequency" class="w-full p-2 border border-gray-300 rounded-md">
+                            <option value="1">Annually</option>
+                            <option value="2">Semi-annually</option>
+                            <option value="4">Quarterly</option>
+                            <option value="12" selected>Monthly</option>
+                            <option value="365">Daily</option>
+                        </select>
+                    </div>
+                    <button id="calculateCompoundInterest" class="btn-primary w-full">Calculate</button>
+                    <div id="compoundResult" class="result-box mt-6 p-4 text-center hidden">
+                        <!-- Result will be displayed here -->
+                    </div>
+                    <div id="compoundError" class="text-red-500 text-sm mt-2 text-center hidden">
+                        Please enter valid numbers for all fields.
+                    </div>
                 </div>
-            </section>
-        </main>
 
-        <footer class="text-center mt-12">
-            <p class="text-[#007BFF]">You've got this. Happy preparing!</p>
-        </footer>
-    </div>
+                <!-- Placeholder for more tools -->
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-gray-500 tool-card h-80 md:h-auto">
+                    <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    <p class="text-center text-lg font-medium">More tools coming soon!</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-gray-500 tool-card h-80 md:h-auto">
+                    <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    <p class="text-center text-lg font-medium">Suggest a tool!</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-6 text-center mt-10">
+        <p>&copy; 2025 FinanceFlow. All rights reserved.</p>
+        <div class="flex justify-center space-x-4 mt-2">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+        </div>
+    </footer>
 
     <script>
-        const brilliantBlues = {
-            dark: '#004AAD',
-            primary: '#007BFF',
-            medium: '#58A6FF',
-            light: '#B2D6FF',
-            background: '#E6F0FF'
-        };
+        // JavaScript for Compound Interest Calculator
+        document.addEventListener('DOMContentLoaded', () => {
+            const principalInput = document.getElementById('principal');
+            const annualRateInput = document.getElementById('annualRate');
+            const yearsInput = document.getElementById('years');
+            const compoundFrequencySelect = document.getElementById('compoundFrequency');
+            const calculateButton = document.getElementById('calculateCompoundInterest');
+            const resultDiv = document.getElementById('compoundResult');
+            const errorDiv = document.getElementById('compoundError');
 
-        const globalChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-        };
-        
-        const tooltipTitleCallback = {
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        title: function(tooltipItems) {
-                            const item = tooltipItems[0];
-                            let label = item.chart.data.labels[item.dataIndex];
-                            if (Array.isArray(label)) {
-                                return label.join(' ');
-                            } else {
-                                return label;
-                            }
-                        }
-                    }
+            calculateButton.addEventListener('click', () => {
+                const P = parseFloat(principalInput.value);
+                const r = parseFloat(annualRateInput.value) / 100; // Convert percentage to decimal
+                const t = parseFloat(yearsInput.value);
+                const n = parseInt(compoundFrequencySelect.value);
+
+                // Basic validation
+                if (isNaN(P) || isNaN(r) || isNaN(t) || isNaN(n) || P < 0 || r < 0 || t < 0 || n <= 0) {
+                    errorDiv.classList.remove('hidden');
+                    resultDiv.classList.add('hidden');
+                    resultDiv.innerHTML = '';
+                    return;
                 }
-            }
-        };
 
-        function wrapLabel(str, maxWidth) {
-            if (str.length <= maxWidth) {
-                return str;
-            }
-            const words = str.split(' ');
-            let lines = [];
-            let currentLine = words[0];
+                errorDiv.classList.add('hidden'); // Hide error if inputs are valid
 
-            for (let i = 1; i < words.length; i++) {
-                if (currentLine.length + words[i].length + 1 < maxWidth) {
-                    currentLine += ' ' + words[i];
-                } else {
-                    lines.push(currentLine);
-                    currentLine = words[i];
-                }
-            }
-            lines.push(currentLine);
-            return lines;
-        }
+                // Compound Interest Formula: A = P(1 + r/n)^(nt)
+                const A = P * Math.pow((1 + r / n), (n * t));
+                const totalInterest = A - P;
 
-        const javaLabels = ['JVM Internals', 'Concurrency & Multithreading', 'OOD & Design Patterns', 'Functional (Java 8+)', 'IO/NIO'].map(label => wrapLabel(label, 16));
-        new Chart(document.getElementById('javaChart'), {
-            type: 'radar',
-            data: {
-                labels: javaLabels,
-                datasets: [{
-                    label: 'Required Depth',
-                    data: [5, 5, 4, 4, 3],
-                    backgroundColor: 'rgba(88, 166, 255, 0.2)',
-                    borderColor: brilliantBlues.medium,
-                    pointBackgroundColor: brilliantBlues.medium,
-                }]
-            },
-            options: { ...globalChartOptions, ...tooltipTitleCallback, scales: { r: { beginAtZero: true, max: 5, pointLabels: { font: { size: 10 } } } } }
+                resultDiv.innerHTML = `
+                    <p class="text-lg mb-2">Future Value: <span class="font-bold text-blue-700">$${A.toFixed(2)}</span></p>
+                    <p class="text-md">Total Interest Earned: <span class="font-bold text-blue-700">$${totalInterest.toFixed(2)}</span></p>
+                `;
+                resultDiv.classList.remove('hidden'); // Show the result
+            });
         });
-
-        const springLabels = ['Spring Core (IoC, DI)', 'Spring Boot Features', 'Spring Data JPA', 'Microservices Patterns', 'Spring Security'].map(label => wrapLabel(label, 16));
-        new Chart(document.getElementById('springChart'), {
-            type: 'radar',
-            data: {
-                labels: springLabels,
-                datasets: [{
-                    label: 'Required Depth',
-                    data: [4, 5, 4, 5, 4],
-                    backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                    borderColor: brilliantBlues.primary,
-                    pointBackgroundColor: brilliantBlues.primary,
-                }]
-            },
-            options: { ...globalChartOptions, ...tooltipTitleCallback, scales: { r: { beginAtZero: true, max: 5, pointLabels: { font: { size: 10 } } } } }
-        });
-
-        const kafkaLabels = ['Core Concepts', 'Architecture', 'Kafka Streams', 'Schema Management', 'Operations & Monitoring'].map(label => wrapLabel(label, 16));
-        new Chart(document.getElementById('kafkaChart'), {
-            type: 'radar',
-            data: {
-                labels: kafkaLabels,
-                datasets: [{
-                    label: 'Required Depth',
-                    data: [5, 4, 3, 4, 4],
-                    backgroundColor: 'rgba(0, 74, 173, 0.2)',
-                    borderColor: brilliantBlues.dark,
-                    pointBackgroundColor: brilliantBlues.dark,
-                }]
-            },
-            options: { ...globalChartOptions, ...tooltipTitleCallback, scales: { r: { beginAtZero: true, max: 5, pointLabels: { font: { size: 10 } } } } }
-        });
-
-        new Chart(document.getElementById('leadershipChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Mentoring & Team Growth', 'Project Management', 'Technical Vision', 'Stakeholder Communication', 'Conflict Resolution'].map(label => wrapLabel(label, 16)),
-                datasets: [{
-                    label: 'Impact Level',
-                    data: [90, 80, 85, 88, 75],
-                    backgroundColor: [
-                        brilliantBlues.dark,
-                        brilliantBlues.primary,
-                        brilliantBlues.medium,
-                        '#2a9d8f',
-                        '#e9c46a'
-                    ],
-                    borderColor: '#fff',
-                    borderWidth: 2
-                }]
-            },
-            options: { ...globalChartOptions, ...tooltipTitleCallback, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, max: 100 } } }
-        });
-
-        new Chart(document.getElementById('focusChart'), {
-            type: 'doughnut',
-            data: {
-                labels: ['System Design', 'Leadership', 'Core Tech (Java, Spring, Kafka)', 'Coding & Algorithms'],
-                datasets: [{
-                    label: 'Focus Allocation %',
-                    data: [35, 25, 30, 10],
-                    backgroundColor: [
-                        brilliantBlues.dark,
-                        brilliantBlues.primary,
-                        brilliantBlues.medium,
-                        brilliantBlues.light
-                    ],
-                    hoverOffset: 4
-                }]
-            },
-            options: { ...globalChartOptions, ...tooltipTitleCallback }
-        });
-
     </script>
 </body>
 </html>
